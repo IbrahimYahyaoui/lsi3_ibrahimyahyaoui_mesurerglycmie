@@ -1,4 +1,4 @@
-package com.example.lsi3_ibrahimyahyaoui_mesurerglycmie;
+package com.example.lsi3_ibrahimyahyaoui_mesurerglycmie.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lsi3_ibrahimyahyaoui_mesurerglycmie.R;
+import com.example.lsi3_ibrahimyahyaoui_mesurerglycmie.controller.Controller;
+
 public class MainActivity extends AppCompatActivity {
+    private Controller  controller = Controller.getInstance() ;
+
     private EditText vm;
     private SeekBar sbAge;
     private TextView res;
@@ -72,27 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
                 // Check if age is greater than 0 and vmText is not empty
                 if (age > 0 && !vmText.isEmpty()) {
-                    double valeurM = Double.parseDouble(vmText);
+                    float valeurM = Float.parseFloat(vmText);
+                    controller.createPatient(age , valeurM , Jeuner);
+                     res.setText(controller.getResult());
 
-                    if (Jeuner) {
-                        if (age >= 13 && (valeurM >= 5.0 && valeurM <= 7.2)) {
-                            res.setText("Niveau de glycémie est normale 1");
-                        } else if (age >= 6 && (valeurM >= 5.0 && valeurM <= 10.0)) {
-                            res.setText("Niveau de glycémie est normale 2");
-                        } else if (valeurM >= 5.5 && valeurM <= 10.0) {
-                            res.setText("Niveau de glycémie est normale 3");
-                        } else {
-                            res.setText("Niveau de glycémie est trop bas ou niveau de glycémie est trop élevée 1");
-                        }
-                    } else {
-                        if (age >= 13 && valeurM < 10.5) {
-                            res.setText("Niveau de glycémie est normale");
-                        } else {
-                            res.setText("Niveau de glycémie est trop bas ou niveau de glycémie est trop élevée 2");
-                        }
-                    }
-                    vm.setText("");
-                    sbAge.setProgress(0);
                 } else {
                     Toast.makeText(MainActivity.this, "Niveau de glycémie or age are empty", Toast.LENGTH_SHORT).show();
 
@@ -102,3 +90,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
+
+

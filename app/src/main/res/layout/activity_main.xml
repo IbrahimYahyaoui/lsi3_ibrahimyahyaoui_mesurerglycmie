@@ -124,17 +124,7 @@ android:inputType="numberDecimal"
         android:gravity="center"
         android:textSize="18sp"
         android:background="@color/bleu"
-        />
-    <TextView
-        android:id="@+id/res"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="..."
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
+
         />
 
 

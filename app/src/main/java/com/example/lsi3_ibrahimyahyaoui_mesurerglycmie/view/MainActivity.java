@@ -1,8 +1,10 @@
 package com.example.lsi3_ibrahimyahyaoui_mesurerglycmie.view;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,10 +20,10 @@ import com.example.lsi3_ibrahimyahyaoui_mesurerglycmie.controller.Controller;
 
 public class MainActivity extends AppCompatActivity {
     private Controller  controller = Controller.getInstance() ;
-
+    private  final int REQUEST_CODE = 1 ;
     private EditText vm;
     private SeekBar sbAge;
-    private TextView res;
+
     private Button btn;
     private RadioGroup rbGrp;
     private TextView agePrv;
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         agePrv = findViewById(R.id.agePrv);
         vm = findViewById(R.id.vm);
         sbAge = findViewById(R.id.sbAGE);
-        res = findViewById(R.id.res);
         rbGrp = findViewById(R.id.rbGrp);
         btn = findViewById(R.id.btnConsulter);
         oui = findViewById(R.id.oui);
@@ -79,7 +80,13 @@ public class MainActivity extends AppCompatActivity {
                 if (age > 0 && !vmText.isEmpty()) {
                     float valeurM = Float.parseFloat(vmText);
                     controller.createPatient(age , valeurM , Jeuner);
-                     res.setText(controller.getResult());
+                  //   res.setText(controller.getResult());
+
+                    Intent i = new Intent(MainActivity.this,ConsultActivity.class);
+                    i.putExtra( "response" , controller.getResult());
+                    startActivityForResult(i ,REQUEST_CODE);
+
+
 
                 } else {
                     Toast.makeText(MainActivity.this, "Niveau de glycémie or age are empty", Toast.LENGTH_SHORT).show();
@@ -89,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-}
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE) {
+            if(resultCode == RESULT_CANCELED) {
+                Toast.makeText(MainActivity.this, "error NUll response", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+}
 

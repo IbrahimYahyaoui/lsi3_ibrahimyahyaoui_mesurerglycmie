@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LSI3_ibrahimYahyaoui_mesurerGlycmie"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".view.ConsultActivity"
+            android:exported="false" />
         <activity
             android:name=".view.HomeActivity"
             android:exported="true">
@@ -23,11 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.MainActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

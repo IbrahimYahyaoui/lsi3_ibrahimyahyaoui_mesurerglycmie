@@ -6,6 +6,7 @@ public class Controller {
     private static Controller instance = null ;
     private static Patient patient ;
     private Controller() {
+
         super();
     }
 
